@@ -3,7 +3,7 @@
     "actorSpecification": 1,
     "name": "app-reviews-scraper",
     "title": "App Store & Google Play Reviews Scraper",
-    "description": "Collect public user reviews from the Apple App Store and Google Play in one run: rating, title, text, author, app version, date, helpful votes and developer replies. Pay per review; apps that cannot be found are reported for free.",
+    "description": "Scrape App Store and Google Play reviews in one run: rating, text, author, version, date, developer reply. Any country and sort order. Pay per review.",
     "version": "0.1",
     "buildTag": "latest",
     "meta": {

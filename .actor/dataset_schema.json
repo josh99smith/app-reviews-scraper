@@ -1,6 +1,169 @@
 {
     "actorSpecification": 1,
-    "fields": {},
+    "fields": {
+        "type": "object",
+        "description": "One record per app review collected from the Apple App Store or Google Play. Apps that could not be processed produce a failure record with success: false, errorType and error instead of review fields.",
+        "properties": {
+            "store": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "enum": [
+                    "apple",
+                    "google",
+                    null
+                ],
+                "description": "Which store the record comes from: \"apple\" or \"google\" (null on a failure record when the input could not be recognised)."
+            },
+            "appId": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Numeric Apple app id (e.g. \"324684580\") or Android package name (e.g. \"com.spotify.music\"); null when the input was not a valid identifier."
+            },
+            "appName": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Name of the app as shown on the store listing."
+            },
+            "developer": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Developer or publisher name shown on the store listing."
+            },
+            "reviewId": {
+                "type": "string",
+                "description": "Review id assigned by the store; unique within a store."
+            },
+            "title": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Review headline; App Store only, always null for Google Play reviews."
+            },
+            "text": {
+                "type": "string",
+                "description": "Full review text as written by the user."
+            },
+            "rating": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5,
+                "description": "Star rating from 1 to 5."
+            },
+            "authorName": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Public display name shown next to the review on the store page."
+            },
+            "version": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "App version the review was written for, when the store provides it."
+            },
+            "date": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "format": "date-time",
+                "description": "When the review was posted, as an ISO 8601 timestamp."
+            },
+            "helpfulVotes": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of helpful votes (Apple voteSum, Google Play thumbs-up)."
+            },
+            "developerReply": {
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "The developer's public reply to the review (Google Play only), or null when there is none.",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "Text of the developer reply."
+                    },
+                    "date": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "When the developer replied, as an ISO 8601 timestamp."
+                    }
+                },
+                "required": [
+                    "text",
+                    "date"
+                ]
+            },
+            "country": {
+                "type": "string",
+                "description": "Two-letter store country the review was fetched from (e.g. \"us\", \"gb\")."
+            },
+            "language": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Language requested for Google Play reviews (e.g. \"en\"); null for App Store reviews."
+            },
+            "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "Direct link to the review on Google Play, or to the app reviews page on the App Store."
+            },
+            "fetchedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When the actor fetched this record, as an ISO 8601 timestamp."
+            },
+            "success": {
+                "type": "boolean",
+                "description": "Present only on failure records and always false; successful review records omit this field."
+            },
+            "input": {
+                "type": "string",
+                "description": "Failure records only: the app URL or id exactly as supplied in the input."
+            },
+            "errorType": {
+                "type": "string",
+                "enum": [
+                    "invalid-url",
+                    "not-found",
+                    "blocked",
+                    "rate-limited",
+                    "timeout",
+                    "http-error",
+                    "network",
+                    "other"
+                ],
+                "description": "Failure records only: category of the problem, e.g. \"not-found\" when the app does not exist in that store."
+            },
+            "error": {
+                "type": "string",
+                "description": "Failure records only: human-readable explanation of what went wrong."
+            }
+        },
+        "required": [
+            "store",
+            "appId",
+            "fetchedAt"
+        ]
+    },
     "views": {
         "overview": {
             "title": "Overview",
@@ -24,36 +187,100 @@
             "display": {
                 "component": "table",
                 "properties": {
-                    "store": { "label": "Store", "format": "text" },
-                    "appName": { "label": "App", "format": "text" },
-                    "rating": { "label": "Rating", "format": "number" },
-                    "title": { "label": "Title", "format": "text" },
-                    "text": { "label": "Review", "format": "text" },
-                    "authorName": { "label": "Author", "format": "text" },
-                    "date": { "label": "Date", "format": "date" },
-                    "version": { "label": "App version", "format": "text" },
-                    "helpfulVotes": { "label": "Helpful votes", "format": "number" },
-                    "developerReply": { "label": "Developer reply", "format": "object" },
-                    "url": { "label": "Link", "format": "link" },
-                    "errorType": { "label": "Error type", "format": "text" },
-                    "error": { "label": "Error", "format": "text" }
+                    "store": {
+                        "label": "Store",
+                        "format": "text"
+                    },
+                    "appName": {
+                        "label": "App",
+                        "format": "text"
+                    },
+                    "rating": {
+                        "label": "Rating",
+                        "format": "number"
+                    },
+                    "title": {
+                        "label": "Title",
+                        "format": "text"
+                    },
+                    "text": {
+                        "label": "Review",
+                        "format": "text"
+                    },
+                    "authorName": {
+                        "label": "Author",
+                        "format": "text"
+                    },
+                    "date": {
+                        "label": "Date",
+                        "format": "date"
+                    },
+                    "version": {
+                        "label": "App version",
+                        "format": "text"
+                    },
+                    "helpfulVotes": {
+                        "label": "Helpful votes",
+                        "format": "number"
+                    },
+                    "developerReply": {
+                        "label": "Developer reply",
+                        "format": "object"
+                    },
+                    "url": {
+                        "label": "Link",
+                        "format": "link"
+                    },
+                    "errorType": {
+                        "label": "Error type",
+                        "format": "text"
+                    },
+                    "error": {
+                        "label": "Error",
+                        "format": "text"
+                    }
                 }
             }
         },
         "failures": {
             "title": "Failures",
             "transformation": {
-                "fields": ["input", "store", "appId", "errorType", "error", "fetchedAt"]
+                "fields": [
+                    "input",
+                    "store",
+                    "appId",
+                    "errorType",
+                    "error",
+                    "fetchedAt"
+                ]
             },
             "display": {
                 "component": "table",
                 "properties": {
-                    "input": { "label": "Input", "format": "text" },
-                    "store": { "label": "Store", "format": "text" },
-                    "appId": { "label": "App id", "format": "text" },
-                    "errorType": { "label": "Error type", "format": "text" },
-                    "error": { "label": "Error", "format": "text" },
-                    "fetchedAt": { "label": "Time", "format": "date" }
+                    "input": {
+                        "label": "Input",
+                        "format": "text"
+                    },
+                    "store": {
+                        "label": "Store",
+                        "format": "text"
+                    },
+                    "appId": {
+                        "label": "App id",
+                        "format": "text"
+                    },
+                    "errorType": {
+                        "label": "Error type",
+                        "format": "text"
+                    },
+                    "error": {
+                        "label": "Error",
+                        "format": "text"
+                    },
+                    "fetchedAt": {
+                        "label": "Time",
+                        "format": "date"
+                    }
                 }
             }
         }
