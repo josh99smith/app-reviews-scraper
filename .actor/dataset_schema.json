@@ -1,0 +1,61 @@
+{
+    "actorSpecification": 1,
+    "fields": {},
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": [
+                    "store",
+                    "appName",
+                    "rating",
+                    "title",
+                    "text",
+                    "authorName",
+                    "date",
+                    "version",
+                    "helpfulVotes",
+                    "developerReply",
+                    "url",
+                    "errorType",
+                    "error"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "store": { "label": "Store", "format": "text" },
+                    "appName": { "label": "App", "format": "text" },
+                    "rating": { "label": "Rating", "format": "number" },
+                    "title": { "label": "Title", "format": "text" },
+                    "text": { "label": "Review", "format": "text" },
+                    "authorName": { "label": "Author", "format": "text" },
+                    "date": { "label": "Date", "format": "date" },
+                    "version": { "label": "App version", "format": "text" },
+                    "helpfulVotes": { "label": "Helpful votes", "format": "number" },
+                    "developerReply": { "label": "Developer reply", "format": "object" },
+                    "url": { "label": "Link", "format": "link" },
+                    "errorType": { "label": "Error type", "format": "text" },
+                    "error": { "label": "Error", "format": "text" }
+                }
+            }
+        },
+        "failures": {
+            "title": "Failures",
+            "transformation": {
+                "fields": ["input", "store", "appId", "errorType", "error", "fetchedAt"]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "input": { "label": "Input", "format": "text" },
+                    "store": { "label": "Store", "format": "text" },
+                    "appId": { "label": "App id", "format": "text" },
+                    "errorType": { "label": "Error type", "format": "text" },
+                    "error": { "label": "Error", "format": "text" },
+                    "fetchedAt": { "label": "Time", "format": "date" }
+                }
+            }
+        }
+    }
+}

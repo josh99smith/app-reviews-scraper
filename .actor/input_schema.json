@@ -1,0 +1,78 @@
+{
+    "$schema": "https://apify.com/schemas/v1/input.ide.json",
+    "title": "App Store & Google Play Reviews Scraper input",
+    "description": "Paste App Store or Google Play links (or bare app ids) and choose how many reviews you want. Every review is one billable result; apps that cannot be found are reported for free.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "apps": {
+            "title": "Apps",
+            "type": "array",
+            "description": "One app per line. Accepts App Store URLs (`https://apps.apple.com/us/app/.../id324684580`), Google Play URLs (`https://play.google.com/store/apps/details?id=com.spotify.music`), numeric Apple app ids (`324684580`) and Android package names (`com.spotify.music`). The store is detected automatically and duplicates are removed.",
+            "editor": "stringList",
+            "prefill": ["https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580", "com.spotify.music"],
+            "uniqueItems": true
+        },
+        "country": {
+            "title": "Country",
+            "type": "string",
+            "description": "Two-letter store country code (`us`, `gb`, `de`, `jp`, ...). Each App Store country has its own reviews, so run once per country for wider coverage. A country inside an App Store URL overrides this value for that app.",
+            "default": "us",
+            "editor": "textfield",
+            "pattern": "^[a-zA-Z]{2}$"
+        },
+        "language": {
+            "title": "Language",
+            "type": "string",
+            "description": "Language code for Google Play (`en`, `de`, `pt-BR`, ...). The App Store feed does not filter by language and returns whatever language reviewers wrote in.",
+            "default": "en",
+            "editor": "textfield"
+        },
+        "sort": {
+            "title": "Sort order",
+            "type": "string",
+            "description": "`newest` returns the most recent reviews first, `helpful` the ones with most helpful votes, `rating` the highest rated first. The App Store feed only supports newest and helpful natively; for `rating` all available Apple reviews are downloaded and sorted.",
+            "default": "newest",
+            "enum": ["newest", "helpful", "rating"],
+            "enumTitles": ["Newest first", "Most helpful first", "Highest rating first"]
+        },
+        "maxReviewsPerApp": {
+            "title": "Max reviews per app",
+            "type": "integer",
+            "description": "Stop after this many reviews for each app. The public App Store feed exposes at most 500 reviews per app and country, so higher values only matter for Google Play.",
+            "default": 200,
+            "minimum": 1,
+            "maximum": 10000,
+            "editor": "number"
+        },
+        "minRating": {
+            "title": "Minimum rating",
+            "type": "integer",
+            "description": "Only keep reviews with at least this many stars (1-5).",
+            "default": 1,
+            "minimum": 1,
+            "maximum": 5,
+            "editor": "number"
+        },
+        "maxRating": {
+            "title": "Maximum rating",
+            "type": "integer",
+            "description": "Only keep reviews with at most this many stars (1-5). Set both limits to 1 to collect complaints only, or 4-5 for praise.",
+            "default": 5,
+            "minimum": 1,
+            "maximum": 5,
+            "editor": "number"
+        },
+        "timeoutSecs": {
+            "title": "Request timeout (seconds)",
+            "type": "integer",
+            "description": "Give up on a single store request after this many seconds.",
+            "default": 30,
+            "minimum": 5,
+            "maximum": 120,
+            "editor": "number",
+            "sectionCaption": "Advanced"
+        }
+    },
+    "required": ["apps"]
+}

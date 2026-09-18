@@ -1,0 +1,18 @@
+{
+    "seoTitle": "App Store & Google Play Reviews Scraper API",
+    "seoDescription": "Scrape public app reviews from the Apple App Store and Google Play in one run: rating, text, author, version, date, developer reply. Pay per review.",
+    "categories": ["ECOMMERCE", "MARKETING", "AUTOMATION"],
+    "isPublic": true,
+    "actorPermissionLevel": "LIMITED_PERMISSIONS",
+    "defaultRunOptions": { "build": "latest", "memoryMbytes": 512, "timeoutSecs": 3600 },
+    "pricing": {
+        "events": {
+            "review": {
+                "eventTitle": "Review collected",
+                "eventDescription": "One app review stored in the dataset (either store). Apps that cannot be found and store errors are not charged.",
+                "eventPriceUsd": 0.0004,
+                "isPrimaryEvent": true
+            }
+        }
+    }
+}

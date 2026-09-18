@@ -1,0 +1,21 @@
+{
+    "$schema": "https://apify.com/schemas/v1/actor.ide.json",
+    "actorSpecification": 1,
+    "name": "app-reviews-scraper",
+    "title": "App Store & Google Play Reviews Scraper",
+    "description": "Collect public user reviews from the Apple App Store and Google Play in one run: rating, title, text, author, app version, date, helpful votes and developer replies. Pay per review; apps that cannot be found are reported for free.",
+    "version": "0.1",
+    "buildTag": "latest",
+    "meta": {
+        "templateId": "ts-empty",
+        "generatedBy": "Claude Code with Claude Opus 5"
+    },
+    "inputSchema": "./input_schema.json",
+    "outputSchema": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "dockerfile": "../Dockerfile",
+    "minMemoryMbytes": 256,
+    "maxMemoryMbytes": 2048
+}

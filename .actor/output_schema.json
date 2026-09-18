@@ -1,0 +1,18 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "App Store & Google Play Reviews Scraper output",
+    "properties": {
+        "results": {
+            "type": "string",
+            "title": "Reviews",
+            "template": "{{links.apiDefaultDatasetUrl}}",
+            "description": "One record per review with store, app, rating, title, text, author display name, version, date, helpful votes and developer reply. Apps that failed are recorded with success=false."
+        },
+        "summary": {
+            "type": "string",
+            "title": "Run summary",
+            "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY",
+            "description": "Counts of apps requested, reviews fetched and charged, failures, plus per-app metadata (name, developer, average rating, rating count)."
+        }
+    }
+}
