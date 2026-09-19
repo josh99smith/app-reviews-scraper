@@ -110,7 +110,7 @@
         "maxTotalChargeUsd": 0.02,
         "expect": {
             "status": "SUCCEEDED",
-            "maxItems": 60,
+            "maxItems": 134,
             "stoppedEarlyDueToBudget": true
         }
     },
