@@ -127,8 +127,16 @@ const appSummaries: AppSummary[] = [];
 
 async function pushReviews(reviews: Review[]): Promise<number> {
     if (reviews.length === 0 || stopBecauseOfBudget) return 0;
-    const { eventChargeLimitReached, chargedCount } = await Actor.pushData(reviews, CHARGE_EVENT);
-    const pushed = isPayPerEvent ? chargedCount : reviews.length;
+    // Ask the budget how many events still fit, push only that many, and count exactly what was pushed.
+    // (The SDK's returned chargedCount over-reports on the platform, so it is not used for counting.)
+    const allowed = isPayPerEvent ? Actor.getChargingManager().calculateMaxEventChargeCountWithinLimit(CHARGE_EVENT) : reviews.length;
+    const batch = reviews.slice(0, Math.max(0, allowed));
+    let eventChargeLimitReached = batch.length < reviews.length;
+    if (batch.length > 0) {
+        const result = await Actor.pushData(batch, CHARGE_EVENT);
+        eventChargeLimitReached = eventChargeLimitReached || result.eventChargeLimitReached;
+    }
+    const pushed = batch.length;
     reviewsCharged += pushed;
     if (eventChargeLimitReached) {
         stopBecauseOfBudget = true;

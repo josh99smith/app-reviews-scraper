@@ -1,0 +1,126 @@
+{
+    "happy-path": {
+        "input": {
+            "apps": [
+                "https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580",
+                "com.spotify.music"
+            ],
+            "maxReviewsPerApp": 100
+        },
+        "expect": {
+            "status": "SUCCEEDED",
+            "minItems": 150,
+            "maxFailed": 0,
+            "maxDurationSecs": 90
+        }
+    },
+    "id-formats": {
+        "input": {
+            "apps": [
+                "324684580",
+                "https://play.google.com/store/apps/details?id=com.instagram.android&hl=en",
+                "https://apps.apple.com/gb/app/whatsapp-messenger/id310633997",
+                "id284882215"
+            ],
+            "maxReviewsPerApp": 20
+        },
+        "expect": {
+            "status": "SUCCEEDED",
+            "minOk": 60,
+            "maxFailed": 0
+        }
+    },
+    "sort-and-rating-filters": {
+        "input": {
+            "apps": [
+                "com.spotify.music",
+                "324684580"
+            ],
+            "sort": "rating",
+            "minRating": 1,
+            "maxRating": 2,
+            "maxReviewsPerApp": 30,
+            "country": "gb"
+        },
+        "expect": {
+            "status": "SUCCEEDED",
+            "minOk": 20,
+            "maxFailed": 0
+        }
+    },
+    "helpful-sort-other-country": {
+        "input": {
+            "apps": [
+                "com.whatsapp",
+                "310633997"
+            ],
+            "sort": "helpful",
+            "country": "de",
+            "language": "de",
+            "maxReviewsPerApp": 25
+        },
+        "expect": {
+            "status": "SUCCEEDED",
+            "minOk": 20,
+            "maxFailed": 0
+        }
+    },
+    "apple-max-500": {
+        "input": {
+            "apps": [
+                "324684580"
+            ],
+            "maxReviewsPerApp": 1000
+        },
+        "expect": {
+            "status": "SUCCEEDED",
+            "minOk": 400,
+            "maxItems": 501,
+            "maxDurationSecs": 120
+        }
+    },
+    "bad-apps": {
+        "input": {
+            "apps": [
+                "not-an-app",
+                "com.does.not.exist.xyz123",
+                "999999999999",
+                "https://example.com/app"
+            ],
+            "maxReviewsPerApp": 10
+        },
+        "expect": {
+            "status": "SUCCEEDED",
+            "maxOk": 0,
+            "errorTypes": [
+                "invalid-url",
+                "not-found",
+                "http-error",
+                "other"
+            ]
+        }
+    },
+    "budget-cap": {
+        "input": {
+            "apps": [
+                "com.spotify.music"
+            ],
+            "maxReviewsPerApp": 500
+        },
+        "maxTotalChargeUsd": 0.02,
+        "expect": {
+            "status": "SUCCEEDED",
+            "maxItems": 60,
+            "stoppedEarlyDueToBudget": true
+        }
+    },
+    "empty-input": {
+        "input": {
+            "apps": []
+        },
+        "expect": {
+            "status": "FAILED",
+            "maxItems": 0
+        }
+    }
+}
