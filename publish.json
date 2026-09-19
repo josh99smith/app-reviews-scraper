@@ -18,7 +18,7 @@
             "review": {
                 "eventTitle": "Review collected",
                 "eventDescription": "One app review stored in the dataset (either store). Apps that cannot be found and store errors are not charged.",
-                "eventPriceUsd": 0.0004,
+                "eventPriceUsd": 0.00015,
                 "isPrimaryEvent": true
             }
         }

@@ -173,6 +173,8 @@ The `SUMMARY` record in the key-value store lists, for every app, the name, deve
 
 You pay a **flat price per review stored** (shown next to the Start button); 1,000 reviews cost well under a dollar. Invalid identifiers, apps that do not exist and store errors are never charged, and there is no start-up fee. The Actor stops as soon as the maximum cost you set for the run is reached, so a long app list never produces a surprise bill.
 
+**How it compares (September 2026).** Per-review pricing here is $0.00015, in line with the cheapest single-store Actors, and unlike them this Actor covers both stores in one run with one fixed output schema. Apps that cannot be found are free, an error on one app never stops the run, and reviews filtered out by rating or date are never billed.
+
 ## Tips
 
 - **More Apple reviews**: the 500-review limit is per country. Run the same app with `country` set to `gb`, `de`, `fr`, `jp` and so on (or several runs on a schedule) and merge the datasets by `reviewId`.
@@ -200,6 +202,10 @@ No. Only the public display name shown on the store page is stored, exactly as t
 ### Is it legal to scrape App Store and Google Play reviews?
 
 The Actor only reads pages and feeds that Apple and Google publish to everyone without a login, at low request rates, and stores what the stores show publicly. Using the data lawfully and within the store terms is your responsibility.
+
+### Will the output fields change between runs?
+
+No. Output fields are stable: existing fields are never renamed or removed without a major version bump announced in the changelog, and new fields are only ever added. You can build integrations on the schema without checking it after every run.
 
 ## Related Actors by the same developer
 

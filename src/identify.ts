@@ -15,6 +15,9 @@ export function identifyApp(raw: string): AppTarget | null {
     if (!input) return null;
 
     if (APPLE_ID_RE.test(input)) return { input, store: 'apple', appId: input };
+    // "id324684580" as it appears at the end of App Store URLs, with or without the "id" prefix.
+    const prefixed = /^id(\d{6,12})$/i.exec(input);
+    if (prefixed) return { input, store: 'apple', appId: prefixed[1] };
     if (ANDROID_PACKAGE_RE.test(input)) return { input, store: 'google', appId: input };
 
     let url: URL;

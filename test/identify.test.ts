@@ -3,6 +3,11 @@ import { describe, expect, it } from 'vitest';
 import { identifyApp, normalizeCountry, normalizeLanguage } from '../src/identify.js';
 
 describe('identifyApp', () => {
+    it('accepts an id-prefixed Apple id', () => {
+        expect(identifyApp('id284882215')).toMatchObject({ store: 'apple', appId: '284882215' });
+        expect(identifyApp('ID284882215')).toMatchObject({ store: 'apple', appId: '284882215' });
+    });
+
     it('detects App Store URLs with a country', () => {
         const t = identifyApp('https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580');
         expect(t).toEqual({
