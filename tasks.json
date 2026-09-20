@@ -1,0 +1,65 @@
+[
+    {
+        "name": "scrape-spotify-app-reviews-both-stores",
+        "title": "Scrape Spotify reviews from both app stores",
+        "seoTitle": "Scrape Spotify reviews from the App Store and Google Play",
+        "seoDescription": "Newest Spotify reviews from Apple's App Store and Google Play in one dataset: rating, text, version, date and developer replies.",
+        "description": "Collect the newest Spotify reviews from both the Apple App Store and Google Play in one run, with rating, text, app version, date and developer replies. Swap in any app URL, Apple id or Android package name.",
+        "input": {
+            "apps": [
+                "https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580",
+                "com.spotify.music"
+            ],
+            "maxReviewsPerApp": 200,
+            "sort": "newest"
+        }
+    },
+    {
+        "name": "one-and-two-star-app-reviews-for-product-feedback",
+        "title": "1 and 2 star reviews for product feedback",
+        "seoTitle": "Get 1 and 2 star app reviews for product feedback",
+        "seoDescription": "Pull only the lowest-rated recent reviews of an app from both stores to find bugs, complaints and churn reasons fast. Filtered reviews are free.",
+        "description": "Collect only 1 and 2 star reviews of an app from both stores to surface bugs, complaints and churn reasons quickly. Reviews outside the rating range are filtered before billing.",
+        "input": {
+            "apps": [
+                "com.whatsapp",
+                "310633997"
+            ],
+            "minRating": 1,
+            "maxRating": 2,
+            "maxReviewsPerApp": 150,
+            "sort": "newest"
+        }
+    },
+    {
+        "name": "google-play-reviews-export-to-csv",
+        "title": "Export Google Play reviews to CSV",
+        "seoTitle": "Export Google Play reviews to CSV or Excel",
+        "seoDescription": "Download Google Play reviews for any Android package name as CSV, Excel or JSON, including thumbs-up counts, app version and developer replies.",
+        "description": "Download Google Play reviews for Android apps by package name and export them as CSV, Excel or JSON from the dataset. Includes thumbs-up counts, app version and developer replies.",
+        "input": {
+            "apps": [
+                "com.instagram.android",
+                "com.duolingo"
+            ],
+            "maxReviewsPerApp": 300,
+            "sort": "newest"
+        }
+    },
+    {
+        "name": "app-store-reviews-by-country",
+        "title": "App Store reviews from a specific country",
+        "seoTitle": "Scrape App Store reviews from one country (UK example)",
+        "seoDescription": "Collect Apple App Store reviews from one country's storefront, here the United Kingdom, to compare sentiment across markets.",
+        "description": "Collect Apple App Store reviews from a single country storefront, the United Kingdom in this example, to compare sentiment and feature requests across markets. Run once per country for full coverage.",
+        "input": {
+            "apps": [
+                "https://apps.apple.com/gb/app/whatsapp-messenger/id310633997",
+                "324684580"
+            ],
+            "country": "gb",
+            "maxReviewsPerApp": 200,
+            "sort": "helpful"
+        }
+    }
+]
