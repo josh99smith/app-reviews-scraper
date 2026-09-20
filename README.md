@@ -1,3 +1,5 @@
+![app-reviews-scraper banner](https://raw.githubusercontent.com/josh99smith/apify-actor-assets/main/banners/app-reviews-scraper.png)
+
 An **App Store and Google Play reviews scraper** that collects public user reviews from both stores in a single run. Paste app links or ids from either store and get back every review as a clean JSON record: star rating, title, text, reviewer display name, app version, date, helpful votes and the developer's reply where one exists. Apps that cannot be found are reported **free of charge**; you pay a small flat price per review.
 
 Built for product managers, app marketers, researchers and developers who need review data as an API rather than copied from store pages.
@@ -85,6 +87,8 @@ console.log(items);
 The Actor is also available as a tool through the Apify MCP server for AI agents, and it can be scheduled or connected to Zapier, Make, n8n and Google Sheets in the **Integrations** tab.
 
 ## Output
+
+![Sample output of app-reviews-scraper](https://raw.githubusercontent.com/josh99smith/apify-actor-assets/main/previews/app-reviews-scraper.png)
 
 One record per review, identical shape for both stores:
 
