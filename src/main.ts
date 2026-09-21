@@ -50,6 +50,22 @@ function clampInt(value: unknown, fallback: number, min: number, max: number): n
     return Math.min(Math.max(n, min), max);
 }
 
+/**
+ * How many more `eventName` events fit in this run's cost cap, computed from our own count of events
+ * already charged (the SDK's internal bookkeeping has been observed to lag between batches).
+ */
+function eventsWithinBudget(eventName: string, alreadyCharged: number): number {
+    const cm = Actor.getChargingManager();
+    const info = cm.getPricingInfo();
+    if (!info.isPayPerEvent) return Number.MAX_SAFE_INTEGER;
+    const price = info.perEventPrices[eventName] ?? 0;
+    const cap = cm.getMaxTotalChargeUsd();
+    const sdkAllowed = cm.calculateMaxEventChargeCountWithinLimit(eventName);
+    if (!Number.isFinite(cap) || price <= 0) return sdkAllowed;
+    const own = Math.max(0, Math.floor((cap - alreadyCharged * price) / price + 1e-9));
+    return Math.min(sdkAllowed, own);
+}
+
 await Actor.init();
 
 let aborting = false;
@@ -125,11 +141,22 @@ let reviewsFetched = 0;
 let stopBecauseOfBudget = false;
 const appSummaries: AppSummary[] = [];
 
+// Charged pushes are serialised: apps are fetched by concurrent workers, and two batches in flight at once
+// would both read the same remaining budget, land in the dataset before either charge is recorded, and
+// deliver unbilled reviews past the cap (the SDK pushes items before it charges for them).
+let pushQueue: Promise<unknown> = Promise.resolve();
+
 async function pushReviews(reviews: Review[]): Promise<number> {
+    const next = pushQueue.then(async () => pushReviewsNow(reviews));
+    pushQueue = next.catch(() => undefined);
+    return next;
+}
+
+async function pushReviewsNow(reviews: Review[]): Promise<number> {
     if (reviews.length === 0 || stopBecauseOfBudget) return 0;
     // Ask the budget how many events still fit, push only that many, and count exactly what was pushed.
     // (The SDK's returned chargedCount over-reports on the platform, so it is not used for counting.)
-    const allowed = isPayPerEvent ? Actor.getChargingManager().calculateMaxEventChargeCountWithinLimit(CHARGE_EVENT) : reviews.length;
+    const allowed = isPayPerEvent ? eventsWithinBudget(CHARGE_EVENT, reviewsCharged) : reviews.length;
     const batch = reviews.slice(0, Math.max(0, allowed));
     let eventChargeLimitReached = batch.length < reviews.length;
     if (batch.length > 0) {
