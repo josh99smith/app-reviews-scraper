@@ -10,8 +10,7 @@
             "type": "array",
             "description": "One app per line. Accepts App Store URLs (`https://apps.apple.com/us/app/.../id324684580`), Google Play URLs (`https://play.google.com/store/apps/details?id=com.spotify.music`), numeric Apple app ids (`324684580`) and Android package names (`com.spotify.music`). The store is detected automatically and duplicates are removed.",
             "editor": "stringList",
-            "prefill": ["https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580", "com.spotify.music"],
-            "uniqueItems": true
+            "prefill": ["https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580", "com.spotify.music"]
         },
         "country": {
             "title": "Country",
