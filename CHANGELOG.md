@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 (2026-09-20)
+
+- Fixed: with several apps fetched in parallel, two review pages could be delivered at once and overshoot the run's cost cap with reviews that were never billed. Charged pushes are now serialised and the remaining budget is also tracked from the Actor's own charge count.
+- Duplicate apps in the input are now deduplicated by the Actor instead of being rejected by input validation.
+
 ## 0.1.0 (2026-09-18)
 
 - Initial release: Apple App Store reviews via the public customer-reviews RSS feed (up to 500 per app and country) and Google Play reviews via the public Play web endpoints (google-play-scraper, MIT).
