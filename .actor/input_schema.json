@@ -1,6 +1,6 @@
 {
     "$schema": "https://apify.com/schemas/v1/input.ide.json",
-    "title": "App Store & Google Play Reviews Scraper input",
+    "title": "Best Damn App Reviews Scraper input",
     "description": "Paste App Store or Google Play links (or bare app ids) and choose how many reviews you want. Every review is one billable result; apps that cannot be found are reported for free.",
     "type": "object",
     "schemaVersion": 1,

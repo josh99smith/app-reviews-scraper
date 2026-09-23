@@ -1,6 +1,6 @@
 {
     "actorOutputSchemaVersion": 1,
-    "title": "App Store & Google Play Reviews Scraper output",
+    "title": "Best Damn App Reviews Scraper output",
     "properties": {
         "results": {
             "type": "string",

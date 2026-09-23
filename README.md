@@ -1,4 +1,4 @@
-![app-reviews-scraper banner](https://raw.githubusercontent.com/josh99smith/apify-actor-assets/main/banners/app-reviews-scraper.png)
+![app-reviews-scraper banner](https://raw.githubusercontent.com/josh99smith/apify-actor-assets/main/banners/app-reviews-scraper.png?v=bd1)
 
 An **App Store and Google Play reviews scraper** that collects public user reviews from both stores in a single run. Paste app links or ids from either store and get back every review as a clean JSON record: star rating, title, text, reviewer display name, app version, date, helpful votes and the developer's reply where one exists. Apps that cannot be found are reported **free of charge**; you pay a small flat price per review.
 
@@ -253,6 +253,7 @@ You can also attach [webhooks](https://docs.apify.com/platform/integrations/webh
 - [Best Damn PDF Text Extractor](https://apify.com/josh99smith/pdf-text-extractor): text and metadata from PDF files.
 - [Best Damn Sitemap URL Extractor](https://apify.com/josh99smith/sitemap-url-extractor): all URLs from XML sitemaps.
 - [Best Damn RSS to JSON Converter](https://apify.com/josh99smith/rss-feed-to-json): RSS and Atom feeds as JSON.
+- [Best Damn YouTube Comments Scraper](https://apify.com/josh99smith/youtube-comments-scraper): comments and replies from YouTube videos and channels.
 
 ## Support and feedback
 
