@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2026-09-23)
+
+- Listing: joined the Best Damn series. New title "Best Damn App Reviews Scraper", new description, icon and README banner. No change to inputs, output or pricing.
+
 ## 0.1.1 (2026-09-20)
 
 - Fixed: with several apps fetched in parallel, two review pages could be delivered at once and overshoot the run's cost cap with reviews that were never billed. Charged pushes are now serialised and the remaining budget is also tracked from the Actor's own charge count.

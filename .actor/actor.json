@@ -2,8 +2,8 @@
     "$schema": "https://apify.com/schemas/v1/actor.ide.json",
     "actorSpecification": 1,
     "name": "app-reviews-scraper",
-    "title": "App Store & Google Play Reviews Scraper",
-    "description": "Scrape App Store and Google Play reviews in one run: rating, text, author, version, date, developer reply. Any country and sort order. Pay per review.",
+    "title": "Best Damn App Reviews Scraper",
+    "description": "Scrape App Store and Google Play reviews in a single run: rating, text, author, app version, date and developer reply, for any country and sort order. One clean dataset at a flat price per review.",
     "version": "0.1",
     "buildTag": "latest",
     "meta": {
