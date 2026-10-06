@@ -258,6 +258,6 @@ You can also attach [webhooks](https://docs.apify.com/platform/integrations/webh
 
 ## Support and feedback
 
-Found an app that is not parsed correctly or need an extra field? Open a ticket in the **Issues** tab of this Actor. The source code is MIT licensed.
+Found an app that is not parsed correctly or need an extra field? Open a ticket in the **Issues** tab of this Actor. The source code is MIT licensed. If this Actor saved you time, a review on its Store page helps other people find it.
 
 The full source code is on GitHub: [josh99smith/app-reviews-scraper](https://github.com/josh99smith/app-reviews-scraper). Stars and pull requests are welcome.
